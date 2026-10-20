@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxito Photo Pro | Edicón de PC gratuita, rápida y avanzada</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Outfi y Creepster para títulos escalofriantes pero modernos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        // Configuración de colores personalizados de Tailwind para Halloween
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spooky: {
+                            orange: '#ff6600',
+                            orangeHover: '#e05500',
+                            orangeGlow: '#ff8533',
+                            purpleDark: '#120a1c',
+                            purpleMedium: '#1d122b',
+                            charcoal: '#1a181c',
+                            accentGreen: '#39ff14',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        spooky: ['Creepster', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados y Animaciones CSS de Halloween */
+        body {
+            background-color: #0c0714;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Resplandor neón naranja */
+        .orange-glow-text {
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.7), 0 0 20px rgba(255, 102, 0, 0.4);
+        }
+
+        .orange-glow-box {
+            box-shadow: 0 0 25px -5px rgba(255, 102, 0, 0.4);
+        }
+
+        .orange-glow-box:hover {
+            box-shadow: 0 0 35px 2px rgba(255, 102, 0, 0.7);
+        }
+
+        /* Murciélagos animados volando en segundo plano */
+        .bat {
+            position: absolute;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600' opacity='0.3'%3E%3Cpath d='M12 4.5C10 2 6 2 2 6c0 4 3 7 3 7s-1 4 2 5c3 1 5-2 5-2s2 3 5 2c3-1 2-5 2-5s3-3 3-7c-4-4-8-4-10-1.5z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 1;
+            animation: fly 16s linear infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(100vh) translateX(-10vw) scale(0.5) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            50% {
+                transform: translateY(40vh) translateX(50vw) scale(0.9) rotate(15deg);
+            }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-10vh) translateX(110vw) scale(0.5) rotate(-10deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animación de flotado suave para elementos decorativos */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .floating-delayed {
+            animation: float 6s ease-in-out 2s infinite;
+        }
+
+        /* Animación de pulso de ojos de calabaza */
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 4px #ff6600); opacity: 0.9; }
+            50% { filter: drop-shadow(0 0 12px #ff8533); opacity: 1; }
+        }
+
+        .pumpkin-eyes {
+            animation: pulse-glow 2.5s infinite;
+        }
+
+        /* Personalización de la barra deslizante de Antes/Después */
+        .slider-container {
+            position: relative;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .img-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        /* Estilo para los revelados con scroll (Reveal transition) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-spooky-purpleDark text-gray-200 antialiased selection:bg-spooky-orange selection:text-white">
+
+    <!-- ========================================== -->
+    <!-- CONFIGURACIÓN GLOBAL DEL LINK "EMPEZAR"   -->
+    <!-- Cambia la URL abajo para redirigir         -->
+    <!-- ========================================== -->
+    <script>
+        // CONFIGURA AQUÍ EL LINK DESTINO PARA TODOS LOS BOTONES "EMPEZAR"
+        const CONFIG_LINK_EMPEZAR = "https://maxibloxsites.github.io/MaxitoPhotoPro-Edit/";
+
+        // Aplica el link dinámicamente cuando carga el documento
+        document.addEventListener("DOMContentLoaded", () => {
+            const startButtons = document.querySelectorAll('.btn-empezar-link');
+            startButtons.forEach(btn => {
+                btn.setAttribute('href', CONFIG_LINK_EMPEZAR);
+            });
+        });
+    </script>
+
+    <!-- Contenedor de Murciélagos de Fondo -->
+    <div id="bat-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Telarañas Decorativas de Esquinas -->
+    <svg class="fixed top-0 left-0 w-32 h-32 md:w-48 md:h-48 opacity-20 pointer-events-none z-10 text-spooky-orange" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M0,0 L100,0 C70,20 70,70 0,100 L0,0 Z M20,0 C20,30 30,20 0,20 M40,0 C40,50 50,40 0,40 M60,0 C60,70 70,60 0,60 M80,0 C80,85 85,80 0,80" stroke="currentColor" stroke-width="1" fill="none"/>
+    </svg>
+    <svg class="fixed top-0 right-0 w-32 h-32 md:w-48 md:h-48 opacity-20 pointer-events-none z-10 text-spooky-orange transform scale-x-[-1]" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M0,0 L100,0 C70,20 70,70 0,100 L0,0 Z M20,0 C20,30 30,20 0,20 M40,0 C40,50 50,40 0,40 M60,0 C60,70 70,60 0,60 M80,0 C80,85 85,80 0,80" stroke="currentColor" stroke-width="1" fill="none"/>
+    </svg>
+
+    <!-- ========================================== -->
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR)     -->
+    <!-- ========================================== -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-spooky-purpleDark/80 border-b border-spooky-orange/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- LOGO CON VARITA / CÁMARA Y CALABAZA -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10 bg-spooky-orange rounded-xl flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-spooky-orange/30 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <!-- Ícono diminuto de fantasma flotando -->
+                        <i class="fa-solid fa-ghost absolute -top-2 -right-2 text-xs text-amber-300 animate-bounce"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-wide text-white">
+                        Maxito Photo Pro<span class="text-spooky-orange orange-glow-text"> Halloween</span>
+                    </span>
+                </a>
+
+                <!-- ENLACES NAVEGACIÓN ESCRITORIO -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                    <a href="#inicio" class="hover:text-spooky-orange transition-colors">Inicio</a>
+                    <a href="#caracteristicas" class="hover:text-spooky-orange transition-colors">Características</a>
+                    <a href="#demostracion" class="hover:text-spooky-orange transition-colors">Demostración</a>
+                </nav>
+
+                <!-- BOTÓN DESTACADO "EMPEZAR" -->
+                <div class="hidden md:flex items-center">
+                    <a href="https://ejemplo.com/empezar" class="btn-empezar-link relative inline-flex items-center justify-center px-6 py-2.5 font-bold text-white transition-all bg-spooky-orange rounded-full group overflow-hidden orange-glow-box hover:bg-spooky-orangeHover active:scale-95">
+                        <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-20"></span>
+                        <i class="fa-solid fa-skull mr-2 text-sm group-hover:rotate-12 transition-transform"></i>
+                        <span>Empezar</span>
+                    </a>
+                </div>
+
+                <!-- BOTÓN MENÚ MÓVIL -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MENÚ MÓVIL DESPLEGABLE -->
+        <div id="mobile-menu" class="hidden md:hidden bg-spooky-purpleMedium border-b border-spooky-orange/30 px-4 pt-2 pb-6 space-y-4">
+            <a href="#inicio" class="block px-3 py-2 rounded-md hover:bg-spooky-orange/10 hover:text-spooky-orange font-medium">Inicio</a>
+            <a href="#caracteristicas" class="block px-3 py-2 rounded-md hover:bg-spooky-orange/10 hover:text-spooky-orange font-medium">Características</a>
+            <a href="#demostracion" class="block px-3 py-2 rounded-md hover:bg-spooky-orange/10 hover:text-spooky-orange font-medium">Demostración</a>
+            <a href="https://ejemplo.com/empezar" class="btn-empezar-link block text-center w-full py-3 bg-spooky-orange font-bold rounded-xl text-white orange-glow-box">
+                <i class="fa-solid fa-skull mr-2"></i> Empezar
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-20">
+
+        <!-- ========================================== -->
+        <!-- HERO SECTION (SECCIÓN PRINCIPAL)          -->
+        <!-- ========================================== -->
+        <section id="inicio" class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+            <!-- Destellos de luz neón en fondo -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-spooky-orange/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- TEXTO DEL HERO -->
+                    <div class="lg:col-span-6 text-center lg:text-left reveal active">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-spooky-orange/15 border border-spooky-orange/50 text-spooky-orange font-bold text-xs sm:text-sm mb-6 orange-glow-box">
+                            <i class="fa-solid fa-gift"></i>
+                            <span>100% GRATIS &bull; SIN REGISTRO</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                            Transforma tus fotos con la <span class="text-spooky-orange orange-glow-text font-spooky tracking-wider">Magia de Halloween</span>
+                        </h1>
+                        
+                        <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 font-light">
+                            Edita y dale un estilo único a tus fotografías totalmente gratis. Aplica efectos instantáneos, retoques temáticos y transformaciones sorprendentes sin crear cuenta ni descargar nada.
+                        </p>
+
+                        <!-- BOTONES DE ACCIÓN PRINCIPAL -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="https://ejemplo.com/empezar" class="btn-empezar-link w-full sm:w-auto px-8 py-4 bg-spooky-orange hover:bg-spooky-orangeHover text-white font-extrabold text-lg rounded-2xl shadow-xl orange-glow-box transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                                <span>Empezar Gratis</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="#demostracion" class="w-full sm:w-auto px-7 py-4 bg-spooky-purpleMedium/80 hover:bg-spooky-purpleMedium border border-spooky-orange/30 text-gray-200 font-semibold text-lg rounded-2xl transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-play text-spooky-orange text-sm"></i>
+                                <span>Ver Demostración</span>
+                            </a>
+                        </div>
+
+                        <!-- DESTACADOS DE GRATUIDAD -->
+                        <div class="mt-10 pt-8 border-t border-gray-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-gray-300">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-spooky-accentGreen"></i>
+                                <span>Sin marca de agua</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-spooky-accentGreen"></i>
+                                <span>Ilimitado</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-spooky-accentGreen"></i>
+                                <span>Acceso Inmediato</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PREVIEW INTERACTIVO ANTES / DESPUÉS -->
+                    <div id="demostracion" class="lg:col-span-6 reveal">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            
+                            <!-- Decoración SVG Calabaza Flotante -->
+                            <div class="absolute -top-10 -right-6 w-20 h-20 z-20 floating">
+                                <svg viewBox="0 0 100 100" class="w-full h-full filter drop-shadow-lg">
+                                    <!-- Cuerpo Calabaza -->
+                                    <path d="M50 15 C20 15 5 35 5 60 C5 85 25 95 50 95 C75 95 95 85 95 60 C95 35 80 15 50 15 Z" fill="#ff6600"/>
+                                    <path d="M50 15 C35 15 25 35 25 60 C25 85 35 95 50 95 C65 95 75 85 75 60 C75 35 65 15 50 15 Z" fill="#e05500"/>
+                                    <!-- Tallo -->
+                                    <path d="M46 5 Q50 -5 58 8 Q52 12 48 15 Z" fill="#2d5a27"/>
+                                    <!-- Ojos Brillantes -->
+                                    <polygon points="30,40 42,45 35,55" fill="#fff" class="pumpkin-eyes"/>
+                                    <polygon points="70,40 58,45 65,55" fill="#fff" class="pumpkin-eyes"/>
+                                    <!-- Boca -->
+                                    <path d="M28 70 Q50 90 72 70 Q60 80 50 78 Q40 80 28 70 Z" fill="#fff" class="pumpkin-eyes"/>
+                                </svg>
+                            </div>
+
+                            <!-- TARJETA DEL SLIDER DE ANTES Y DESPUÉS -->
+                            <div class="bg-spooky-purpleMedium border-2 border-spooky-orange/40 rounded-3xl p-3 shadow-2xl orange-glow-box relative">
+                                <div id="before-after-slider" class="slider-container relative w-full h-[380px] sm:h-[440px] rounded-2xl overflow-hidden cursor-ew-resize">
+                                    
+                                    <!-- Foto DESPUÉS (Fondo Completo) -->
+                                    <img src="https://images.unsplash.com/photo-1509557965875-b88c97052f0e?auto=format&fit=crop&w=1000&q=80" alt="Halloween Foto Después" class="absolute inset-0 w-full h-full object-cover">
+                                    <span class="absolute bottom-4 right-4 bg-spooky-orange/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">DESPUÉS (Efecto Halloween)</span>
+
+                                    <!-- Foto ANTES (Capa Recortada) -->
+                                    <div id="before-image" class="img-before">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Foto Original Antes" class="absolute inset-0 max-w-none h-full object-cover" style="width: 100%;">
+                                        <span class="absolute bottom-4 left-4 bg-slate-900/90 backdrop-blur text-gray-200 text-xs font-bold px-3 py-1 rounded-full z-10 shadow">ANTES (Original)</span>
+                                    </div>
+
+                                    <!-- LÍNEA SEPARADORA DESLIZANTE -->
+                                    <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-spooky-orange cursor-ew-resize z-20" style="left: 50%;">
+                                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 bg-spooky-orange rounded-full flex items-center justify-center text-slate-950 font-bold shadow-lg border-2 border-white">
+                                            <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="text-center text-xs text-gray-400 mt-3 font-medium">
+                                    <i class="fa-solid fa-hand-pointer text-spooky-orange mr-1"></i> Arrastra el deslizador para ver la transformación
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- CARACTERÍSTICAS PRINCIPALES                -->
+        <!-- ========================================== -->
+        <section id="caracteristicas" class="py-20 bg-spooky-purpleMedium/50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">
+                        Poderosas herramientas de <span class="text-spooky-orange font-spooky tracking-wide">Edición Encantada</span>
+                    </h2>
+                    <p class="text-gray-300">
+                        Disfruta de funciones avanzadas para tus fotos sin costo alguno y sin complicados procesos.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Tarjeta 1 -->
+                    <div class="bg-spooky-purpleMedium p-8 rounded-2xl border border-spooky-orange/20 hover:border-spooky-orange transition-all duration-300 orange-glow-box group reveal">
+                        <div class="w-14 h-14 bg-spooky-orange/10 rounded-xl flex items-center justify-center text-spooky-orange text-2xl mb-6 group-hover:scale-110 group-hover:bg-spooky-orange group-hover:text-slate-950 transition-all">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Retoque Instantáneo</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Mejora tonos, mejora la iluminación, el contraste y todo en CALIDAD 4K.
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta 2 -->
+                    <div class="bg-spooky-purpleMedium p-8 rounded-2xl border border-spooky-orange/20 hover:border-spooky-orange transition-all duration-300 orange-glow-box group reveal">
+                        <div class="w-14 h-14 bg-spooky-orange/10 rounded-xl flex items-center justify-center text-spooky-orange text-2xl mb-6 group-hover:scale-110 group-hover:bg-spooky-orange group-hover:text-slate-950 transition-all">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Rápido y en el navegador</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Funciona directamente desde tu navegador sin descargas de software.
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta 3 -->
+                    <div class="bg-spooky-purpleMedium p-8 rounded-2xl border border-spooky-orange/20 hover:border-spooky-orange transition-all duration-300 orange-glow-box group reveal">
+                        <div class="w-14 h-14 bg-spooky-orange/10 rounded-xl flex items-center justify-center text-spooky-orange text-2xl mb-6 group-hover:scale-110 group-hover:bg-spooky-orange group-hover:text-slate-950 transition-all">
+                            <i class="fa-solid fa-user-slash"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Sin Registro</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Abre la herramienta, sube tu foto y edita inmediatamente sin ingresar datos ni contraseñas.
+                        </p>
+                    </div>
+
+                    <!-- Tarjeta 4 -->
+                    <div class="bg-spooky-purpleMedium p-8 rounded-2xl border border-spooky-orange/20 hover:border-spooky-orange transition-all duration-300 orange-glow-box group reveal">
+                        <div class="w-14 h-14 bg-spooky-orange/10 rounded-xl flex items-center justify-center text-spooky-orange text-2xl mb-6 group-hover:scale-110 group-hover:bg-spooky-orange group-hover:text-slate-950 transition-all">
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-white">Descarga de Máxima Calidad (4K)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Guarda tus imágenes finales en la mayor resolución posible y sin marcas de agua molestas.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- CALL TO ACTION FINAL (CTA)                -->
+        <!-- ========================================== -->
+        <section class="py-20 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-spooky-orange to-amber-600 rounded-3xl p-10 md:p-16 text-center text-slate-950 relative overflow-hidden shadow-2xl reveal">
+                    
+                    <!-- Elementos flotantes de fondo -->
+                    <i class="fa-solid fa-ghost absolute -bottom-6 -left-6 text-9xl opacity-20 transform -rotate-12"></i>
+                    <i class="fa-solid fa-cat absolute -top-6 -right-6 text-9xl opacity-20 transform rotate-12"></i>
+
+                    <div class="inline-block px-4 py-1 bg-slate-950 text-spooky-orange text-xs font-black uppercase rounded-full mb-4">
+                        100% Gratuito
+                    </div>
+
+                    <h2 class="text-3xl sm:text-5xl font-black mb-6 tracking-tight">
+                        ¿Listo para editar tus fotografías?
+                    </h2>
+                    <p class="text-slate-900 text-lg font-medium max-w-2xl mx-auto mb-8">
+                        Comienza ahora mismo de forma libre e ilimitada. Sin registros, sin suscripciones y pagos, rápida y fácil de usar.
+                    </p>
+
+                    <!-- BOTÓN CTA FINAL -->
+                    <a href="https://maxibloxsites.github.io/MaxitoPhotoPro-Edit/" class="btn-empezar-link inline-flex items-center gap-3 px-10 py-5 bg-slate-950 hover:bg-slate-900 text-white font-extrabold text-xl rounded-2xl shadow-2xl transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-wand-magic-sparkles text-spooky-orange"></i>
+                        <span>Empezar Gratis AHORA</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- PIE DE PÁGINA (FOOTER)                     -->
+    <!-- ========================================== -->
+    <footer class="bg-slate-950 border-t border-gray-900 py-12 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <!-- Logo Footer -->
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-spooky-orange rounded-lg flex items-center justify-center text-slate-950 font-bold">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">Maxito Photo Pro<span class="text-spooky-orange"> Halloween Edition</span></span>
+                </div>
+
+                <!-- Copyright -->
+                <p class="text-gray-500 text-sm text-center">
+                    &copy; 2026 | Maxito Studios | Todos los derechos reservados.
+                </p>
+
+                <!-- Redes Sociales -->
+                <div class="flex items-center gap-5 text-gray-400">
+                    <a href="#" class="hover:text-spooky-orange transition-colors text-lg"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-spooky-orange transition-colors text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="hover:text-spooky-orange transition-colors text-lg"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-spooky-orange transition-colors text-lg"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS INTERACTIVOS (JS)                  -->
+    <!-- ========================================== -->
+    <script>
+        // 1. Generador de murciélagos animados en segundo plano
+        function createBats() {
+            const batContainer = document.getElementById('bat-container');
+            const batCount = 12; // Cantidad de murciélagos
+
+            for (let i = 0; i < batCount; i++) {
+                const bat = document.createElement('div');
+                bat.classList.add('bat');
+                
+                // Variaciones de tamaño y posición aleatoria
+                const size = Math.random() * 30 + 20; // 20px - 50px
+                bat.style.width = `${size}px`;
+                bat.style.height = `${size}px`;
+                
+                // Retardo y duración aleatoria de animación
+                bat.style.animationDelay = `${Math.random() * 12}s`;
+                bat.style.animationDuration = `${Math.random() * 10 + 12}s`;
+                
+                batContainer.appendChild(bat);
+            }
+        }
+
+        // 2. Lógica para el Slider Interactivo "Antes / Después"
+        function setupBeforeAfterSlider() {
+            const container = document.getElementById('before-after-slider');
+            const beforeImage = document.getElementById('before-image');
+            const handle = document.getElementById('slider-handle');
+
+            if (!container || !beforeImage || !handle) return;
+
+            let isDragging = false;
+
+            function updateSliderPosition(x) {
+                const rect = container.getBoundingClientRect();
+                let position = x - rect.left;
+                
+                // Restricciones de bordes
+                if (position < 0) position = 0;
+                if (position > rect.width) position = rect.width;
+
+                const percentage = (position / rect.width) * 100;
+                beforeImage.style.width = `${percentage}%`;
+                handle.style.left = `${percentage}%`;
+            }
+
+            // Eventos de ratón
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateSliderPosition(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                updateSliderPosition(e.clientX);
+            });
+
+            // Eventos táctiles para móviles
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                updateSliderPosition(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => { isDragging = false; });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                updateSliderPosition(e.touches[0].clientX);
+            });
+        }
+
+        // 3. Menú Hamburguesa para Móviles
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        }
+
+        // 4. Animación de revelado progresivo al hacer Scroll (Intersection Observer)
+        function setupScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // Inicializar todas las funciones al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            createBats();
+            setupBeforeAfterSlider();
+            setupMobileMenu();
+            setupScrollReveal();
+        });
+    </script>
+</body>
+</html>
